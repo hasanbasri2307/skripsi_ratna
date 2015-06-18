@@ -1,0 +1,45 @@
+<?php $__env->startSection("content"); ?>
+ <div class="container">
+
+      <form class="login-form" action="<?php echo e(site_url('auth/do_login')); ?>" method="post">
+        <div class="login-wrap">
+            <h3 align="center">Kelurahan Meruya Selatan</h3>
+            <img src="<?php echo e(base_url('assets/img/logo-pemprov-dki-jakarta.png')); ?>" style="width: 150px; margin-left: 80px; margin-bottom: 15px;" />
+
+                <?php if(isset($error)): ?>
+
+                  <?php if(!empty($error)): ?>
+
+                    <div class="alert alert-block alert-danger fade in">
+                        <button type="button" class="close close-sm" data-dismiss="alert">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Uppss </strong> <?php echo e($error); ?>
+
+                    </div>
+                  <?php endif; ?>
+                <?php endif; ?>
+
+            <div class="input-group">
+              <span class="input-group-addon"><i class="icon_profile"></i></span>
+              <input type="text" class="form-control" placeholder="Username" autofocus name="username" value="<?php echo e(set_value("username")); ?>">
+            </div>
+            <?php if(form_error("username")): ?>
+                <p style="color:red"><?php echo e(form_error("username")); ?></p>
+            <?php endif; ?>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                <input type="password" class="form-control" placeholder="Password" name="password" value="<?php echo e(set_value("password")); ?>">
+            </div>
+            <?php if(form_error("password")): ?>
+                <p style="color:red"><?php echo e(form_error("password")); ?></p>
+            <?php endif; ?>
+                <br />
+            <input type="submit" value="Login" class="btn btn-primary btn-lg btn-block">
+
+        </div>
+      </form>
+
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.login", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
