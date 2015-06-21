@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><?php echo e($title); ?></title>
+    <link rel="stylesheet" href="<?php echo e(base_url('assets/report/style.css')); ?>" media="all" />
+    <script src="<?php echo e(site_url('assets/chart/Chart.js')); ?>"></script>
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img src="<?php echo e(base_url('assets/report/logo-pemprov-dki-jakarta.png')); ?>">
+      </div>
+      <h1>Laporan Data Stok Periode (<?php echo e(convert_month($bulan)); ?> - <?php echo e($tahun); ?>)</h1>
+      <div id="company" class="clearfix">
+        <div>Kelurahan Meruya Utara</div>
+        <div> Jalan Taman Aries Blok. C/6 No.1 - Kelurahan Meruya Utara
+Kecamatan Kembangan, <br /> Jakarta Barat (kode pos 11620)</div>
+        <div>(Telp 5858934</div>
+        
+      </div>
+      
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th class="service">No</th>
+            <th>Bulan</th>
+            <th>Tahun</th>
+            <th class="desc">Jumlah Stok</th>
+            <th>Stok Tambahan</th>
+            <th>Stok Terpakai</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php
+        $bulan = [];
+        ?>
+        <?php foreach($stok_beras as $key => $item): ?>
+          <tr>
+            <td class="service"><?php echo e($key +=1); ?>.</td>
+            <td class="service"><?php echo e(convert_month($item->bulan)); ?></td>
+            <td class="service"><?php echo e($item->tahun); ?> </td>
+            <td class="desc"><?php echo e($item->jml_stock - $item->tambahan_stock); ?></td>
+            <td class="unit"><?php echo e($item->tambahan_stock); ?></td>
+            <td class="qty"><?php echo e($item-> stock_terpakai); ?></td>
+          </tr>
+          
+        <?php endforeach; ?>
+        
+        </tbody>
+      </table>
+      
+  </body>
+</html>
+

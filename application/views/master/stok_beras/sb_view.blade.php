@@ -28,9 +28,20 @@
                     </p>
                     <p>
                         <h4><em class="pull-left">Jumlah Stok:&nbsp;&nbsp;</em></h4>
+                         {{ number_format($stok_beras->jml_stock - $stok_beras->tambahan_stock) }} karung
+                    </p>
+                    <p>
+                        <h4><em class="pull-left">Tambahan Stock:&nbsp;&nbsp;</em></h4>
+                         {{ number_format($stok_beras->tambahan_stock) }} karung
+                    </p>
+                    <p>
+                        <h4><em class="pull-left">Jumlah Stok Keseluruhan:&nbsp;&nbsp;</em></h4>
                          {{ number_format($stok_beras->jml_stock) }} karung
                     </p>
-                    
+                    <p>
+                        <h4><em class="pull-left">Jumlah Stok Terpakai:&nbsp;&nbsp;</em></h4>
+                         {{ number_format($stok_beras->stock_terpakai) }} karung
+                    </p>
                    
                 </div>
                     <div class="pull-right">

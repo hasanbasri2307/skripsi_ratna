@@ -1,0 +1,95 @@
+<?php $__env->startSection("content"); ?>
+
+    <?php if(!empty(get_ci()->session->flashdata('notif'))): ?>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+              <div class="alert alert-success fade in">
+                   <button type="button" class="close close-sm" data-dismiss="alert">
+                         <i class="icon-remove"></i>
+                   </button>
+                    <strong>Sukses!</strong> <?php echo e(get_ci()->session->flashdata('notif')); ?>
+
+               </div>
+            </section>
+            
+        </div>
+    </div>
+    <?php endif; ?>
+    <?php if(!empty(get_ci()->session->flashdata('notif_error'))): ?>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+              <div class="alert alert-danger fade in">
+                   <button type="button" class="close close-sm" data-dismiss="alert">
+                         <i class="icon-remove"></i>
+                   </button>
+                    <strong>Error!</strong> <?php echo e(get_ci()->session->flashdata('notif_error')); ?>
+
+               </div>
+            </section>
+            
+        </div>
+    </div>
+    <?php endif; ?>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    Data Hasil Seleksi Penerima Beras
+                </header>
+
+                <table class="table table-striped table-advance table-hover">
+                    <tbody>
+                    <tr>
+                      
+                        <th><i class="icon_calendar"></i> Bulan</th>
+                        <th><i class="icon_calendar"></i> Tahun</th>
+                        <th><i class="icon_calendar"></i> Total Warga </th>
+                        <th><i class="icon_calendar"></i> Yang Belum Diambil</th>
+                        <th><i class="icon_calendar"></i> Yang Sudah Diambil </th>
+                        <th><i class="icon_calendar"></i> Yang Tidak Diambil </th>
+                        <th><i class="icon_cogs"></i> Action</th>
+                    </tr>
+                    <?php if(!empty($pembagian)): ?>
+                        <?php foreach($pembagian as $key => $item): ?>
+                        <tr>
+                          
+                            <td><?php echo e(convert_month($item->bulan,"full")); ?> </td>
+                            <td><?php echo e($item->tahun); ?> </td>
+                            <td><?php echo e($item->total_warga); ?> Warga </td>
+                            <td><?php echo e($item->belum_diambil); ?> Warga </td>
+                            <td><?php echo e($item->sudah_diambil); ?> Warga </td>
+                            <td><?php echo e($item->dibatalkan); ?> Warga </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="<?php echo e(site_url('pembagian/view/'.$item->bulan.'/'.$item->tahun)); ?>"><i class="icon_search"></i></a>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                       <tr>
+                            <td colspan="4">Data Kosong</td>
+                        </tr>
+                    <?php endif; ?>    
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <div class="text-center">
+                  <?php echo $links; ?>
+                </div>
+            </section>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.master", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

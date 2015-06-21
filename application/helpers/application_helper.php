@@ -12,25 +12,24 @@ function get_ci()
     return $ci;
 }
 
-function pagination($total_rows)
+function generate_rw()
 {
-    $CI =& get_instance();
+    $rw = [
+       '001' => '001',
+       '002' => '002',
+       '003' => '003',
+       '004' => '004',
+       '005' => '005',
+       '006' => '006',
+       '007' => '007',
+       '008' => '008',
+       '009' => '009',
+       '010' => '010',
+       '011' => '011',
 
-    $CI->pagination->total_rows = $total_rows;
-    $CI->pagination->uri_segment = $total_segments = $CI->uri->total_segments();
+    ];
 
-    $segs = $CI->uri->segment_array();
-    if (count($segs) == 1) {
-        $CI->pagination->base_url = current_url();
-    } else {
-        foreach ($segs as $value) {
-            $url[] = $value;
-        }
-        array_pop($url);
-        $CI->pagination->base_url = site_url(implode('/', $url));
-    }
-
-    return $CI->pagination->create_links();
+    return $rw;
 }
 
 function generate_bulan()
@@ -256,4 +255,52 @@ function convert_days($date)
     }
 
     return $result;
+}
+
+function generate_paging($perpage,$total_rows,$url,$uri_segment=3)
+{
+    $ci = & get_instance();
+
+    $config['base_url'] = $url;
+    $config['total_rows'] = $total_rows;
+    $config['per_page'] = $perpage;
+    $config["uri_segment"] = $uri_segment;
+    $config['full_tag_open'] = '<ul class="pagination">';
+    $config['full_tag_close'] = '</ul>';
+    $config['prev_link'] = '&lt;';
+    $config['prev_tag_open'] = '<li>';
+    $config['prev_tag_close'] = '</li>';
+    $config['next_link'] = '&gt;';
+    $config['next_tag_open'] = '<li>';
+    $config['next_tag_close'] = '</li>';
+    $config['cur_tag_open'] = '<li class="current"><a href="#">';
+    $config['cur_tag_close'] = '</a></li>';
+    $config['num_tag_open'] = '<li>';
+    $config['num_tag_close'] = '</li>';
+    $config['first_tag_open'] = '<li>';
+    $config['first_tag_close'] = '</li>';
+    $config['last_tag_open'] = '<li>';
+    $config['last_tag_close'] = '</li>';
+    $config['first_link'] = '&lt;&lt;';
+    $config['last_link'] = '&gt;&gt;';
+
+    $ci->pagination->initialize($config);
+
+
+    return $ci->pagination->create_links();
+}
+
+function cekDetail($item,$id_warga)
+{
+    $ci = & get_instance();
+    $ci->load->model('transaksi_model');
+    $cek = $ci->transaksi_model->cek($item,$id_warga);
+
+    return $cek;
+}
+
+function getLevel()
+{
+    $ci = & get_instance();
+    return $ci->session->userdata('level');
 }

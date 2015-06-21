@@ -1,0 +1,114 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">Tambah Penerima Beras Miskin</header>
+                <div class="panel-body">
+                    <form method="post" class="form-horizontal" action="<?php echo e(site_url('transaksi/do_add')); ?>">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">No. KK</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="no_kk" class="form-control" value="<?php echo e(set_value('no_kk')); ?>">
+                                <span class="help-block"><?php echo form_error('no_kk'); ?></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nama Kepala Keluarga</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nama_kk" class="form-control" value="<?php echo e(set_value('nama_kk')); ?>">
+                                <span class="help-block"><?php echo form_error('nama_kk'); ?></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nik. KK</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nik_kk" class="form-control" value="<?php echo e(set_value('nik_kk')); ?>">
+                                <span class="help-block"><?php echo form_error('nik_kk'); ?></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">RW</label>
+                            <div class="col-sm-10">
+                                <select name="rw" class="form-control">
+                                  <?php foreach(generate_rw() as $item): ?>
+                                    <option value="<?php echo e($item); ?>"><?php echo e($item); ?></option>
+                                  <?php endforeach; ?>
+                                </select>
+                                <span class="help-block"><?php echo form_error('rw'); ?></span>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">Alamat</label>
+                            <div class="col-sm-10">
+                                <textarea name="alamat_kk" class="form-control"><?php echo e(set_value('alamat_kk')); ?></textarea>
+                                <span class="help-block"><?php echo form_error('alamat_kk'); ?></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Kriteria</label>
+                            <div class="col-sm-10">
+                                <table class="table">
+                              <thead>
+                              <tr>
+                                  <th>#</th>
+                                  <th>Nama Kriteria</th>
+                                  <th>Pilihan</th>
+                                  
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <?php $no=1;?>
+                              <?php if(!empty($kriteria)): ?>
+                                  <?php foreach($kriteria as $item): ?>
+                                      <tr>
+                                          <td><?php echo e($no); ?>.</td>
+                                          <td><?php echo e($item->nama); ?></td>
+                                          <td><input type="checkbox" name="kriteria[]" value="<?php echo e($item->score); ?>_<?php echo e($item->id_kriteria); ?>"></td>
+                                        
+                                      </tr>
+                                  <?php $no++;?>
+                                  <?php endforeach; ?>
+                               <?php else: ?>
+                                  <tr>
+                                      <td colspan="4">Data Kosong</td>
+                                  </tr>
+                                <?php endif; ?>
+                              </tbody>
+                          </table>
+                            </div>
+                        </div>
+                        <?php if(getLevel() != "rw"): ?>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Keterangan</label>
+                            <div class="col-sm-10">
+                                <textarea name="keterangan" class="form-control"><?php echo e(set_value('keterangan')); ?></textarea>
+                                <span class="help-block"><?php echo form_error('keterangan'); ?></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Status</label>
+                            <div class="col-sm-10">
+                                <select name="status" class="form-control">
+                                  <option value="1">Data Lengkap</option>
+                                  <option value="0">Data Belum Lengkap</option>
+                                </select>
+                                <span class="help-block"><?php echo form_error('status'); ?></span>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                        <div class="form-group">
+                            <div class="col-sm-10 pull-right">
+                                <a class="btn  btn-danger" href="<?php echo e(site_url('transaksi')); ?>"><i class="arrow_back"></i> Batal</a>
+                                <button class="btn btn-primary" type="submit"><i class="icon_floppy"></i> Simpan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

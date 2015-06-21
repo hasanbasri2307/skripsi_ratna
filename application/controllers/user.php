@@ -12,39 +12,18 @@ class User extends Protected_Controller {
 
     public function index()
     {
-        $per_page =20;
+        $per_page =5;
+        $url = site_url('user/index');
+        $total_rows = $this->user_model->count_users();
+        $uri_segment=3;
 
-        $config['base_url'] = base_url().'user/';
-        $config['total_rows'] = $this->user_model->count_users();
-        $config['per_page'] = $per_page;
-        $config["uri_segment"] = 3;
-        $config['full_tag_open'] = '<ul class="pagination">';
-        $config['full_tag_close'] = '</ul>';
-        $config['prev_link'] = '&lt;';
-        $config['prev_tag_open'] = '<li>';
-        $config['prev_tag_close'] = '</li>';
-        $config['next_link'] = '&gt;';
-        $config['next_tag_open'] = '<li>';
-        $config['next_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="current"><a href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['first_tag_open'] = '<li>';
-        $config['first_tag_close'] = '</li>';
-        $config['last_tag_open'] = '<li>';
-        $config['last_tag_close'] = '</li>';
-        $config['first_link'] = '&lt;&lt;';
-        $config['last_link'] = '&gt;&gt;';
-
-
-        $this->pagination->initialize($config);
+        $c = generate_paging($per_page,$total_rows,$url,$uri_segment);
 
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         $data['title'] = "User List";
         $data['users'] = $this->user_model->get_user($per_page,$page);
-        $data["links"] = $this->pagination->create_links();
+        $data["links"] = $c;
 
         echo blade()->render("master.user.users",$data);
     }

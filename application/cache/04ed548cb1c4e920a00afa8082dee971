@@ -41,27 +41,33 @@
                         <th><i class="icon_calendar"></i> Status</th>
                         <th><i class="icon_cogs"></i> Action</th>
                     </tr>
-                    <?php foreach($users as $user): ?>
-                    <tr>
-                        <td><?php echo e($user->username); ?></td>
-                        <td><?php echo e($user->level); ?></td>
-                        <td><?php if($user->status ==1): ?> Aktif <?php else: ?> Non Aktif <?php endif; ?></td>
-                        <td>
-                            <div class="btn-group">
-                                <a class="btn btn-primary" href="<?php echo e(site_url('user/view/'.$user->id_user)); ?>"><i class="icon_plus_alt2"></i></a>
-                                <a class="btn btn-success" href="<?php echo e(site_url('user/edit/'.$user->id_user)); ?>"><i class="icon_check_alt2"></i></a>
-                                <a class="btn btn-danger" href="<?php echo e(site_url('user/delete/'.$user->id_user)); ?>" onclick="return confirm('Hapus User ini ?');"><i class="icon_close_alt2"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
+                    <?php if(!empty($users)): ?>
+                        <?php foreach($users as $user): ?>
+                        <tr>
+                            <td><?php echo e($user->username); ?></td>
+                            <td><?php echo e($user->level); ?></td>
+                            <td><?php if($user->status ==1): ?> Aktif <?php else: ?> Non Aktif <?php endif; ?></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="<?php echo e(site_url('user/view/'.$user->id_user)); ?>"><i class="icon_search"></i></a>
+                                    <a class="btn btn-success" href="<?php echo e(site_url('user/edit/'.$user->id_user)); ?>"><i class="icon_check_alt2"></i></a>
+                                    <a class="btn btn-danger" href="<?php echo e(site_url('user/delete/'.$user->id_user)); ?>" onclick="return confirm('Hapus User ini ?');"><i class="icon_close_alt2"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4">Data Kosong</td>
+                        </tr>
+                    <?php endif; ?>
 
                     </tbody>
                 </table>
             </section>
         </div>
     </div>
-    <!-- <div class="row">
+    <div class="row">
         <div class="col-lg-12">
             <section class="panel">
                 <div class="text-center">
@@ -69,6 +75,6 @@
                 </div>
             </section>
         </div>
-    </div> -->
+    </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make("layouts.master", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

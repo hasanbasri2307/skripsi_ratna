@@ -12,39 +12,18 @@ class Stok_beras extends Protected_Controller {
 
     public function index()
     {
-        $per_page =20;
+        $per_page =5;
+        $url = site_url('stok_beras/index');
+        $total_rows = $this->sb_model->count_stok_beras();
+        $uri_segment=3;
 
-        $config['base_url'] = base_url().'stok_beras/';
-        $config['total_rows'] = $this->sb_model->count_stok_beras();
-        $config['per_page'] = $per_page;
-        $config["uri_segment"] = 3;
-        $config['full_tag_open'] = '<ul class="pagination">';
-        $config['full_tag_close'] = '</ul>';
-        $config['prev_link'] = '&lt;';
-        $config['prev_tag_open'] = '<li>';
-        $config['prev_tag_close'] = '</li>';
-        $config['next_link'] = '&gt;';
-        $config['next_tag_open'] = '<li>';
-        $config['next_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="current"><a href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['first_tag_open'] = '<li>';
-        $config['first_tag_close'] = '</li>';
-        $config['last_tag_open'] = '<li>';
-        $config['last_tag_close'] = '</li>';
-        $config['first_link'] = '&lt;&lt;';
-        $config['last_link'] = '&gt;&gt;';
-
-
-        $this->pagination->initialize($config);
+        $c = generate_paging($per_page,$total_rows,$url,$uri_segment);
 
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         $data['title'] = "Stok Beras List";
         $data['sb'] = $this->sb_model->get_stok_beras($per_page,$page);
-        $data["links"] = $this->pagination->create_links();
+        $data["links"] = $c;
 
         echo blade()->render("master.stok_beras.sb",$data);
     }
@@ -74,10 +53,18 @@ class Stok_beras extends Protected_Controller {
         }
         else
         {
+            $tambahan_stock=0;
+            $cek_stok_sebelumnya = $this->sb_model->cek_stok_sebelumnya($bulan,$tahun);
+            if($cek_stok_sebelumnya->total >0 )
+            {
+                $tambahan_stock = $cek_stok_sebelumnya->total;
+            }
+
             $data = [
                 'bulan' =>$bulan,
                 'tahun' => $tahun,
-                'jml_stock' => $jml_stok
+                'jml_stock' => $jml_stok + $tambahan_stock,
+                'tambahan_stock' =>$tambahan_stock
             ];
 
             $check = $this->sb_model->cek_stok($bulan,$tahun);
@@ -93,6 +80,7 @@ class Stok_beras extends Protected_Controller {
 
                 if($insert)
                 {
+                    
                     $this->session->set_flashdata("notif","Sukses Tambah Stok Beras");
                     redirect("stok_beras");
                 }

@@ -38,7 +38,7 @@ class User_model extends CI_Model {
 
     public function count_users()
     {
-        return $this->db->count_all("user");
+        return $this->db->get('user')->num_rows();
     }
 
     public function insert_user($data)

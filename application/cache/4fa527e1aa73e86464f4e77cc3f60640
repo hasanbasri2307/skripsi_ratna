@@ -1,0 +1,77 @@
+<?php $__env->startSection('content'); ?>
+    <?php if(!empty(get_ci()->session->flashdata('notif'))): ?>
+   
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+              <div class="alert alert-success fade in">
+                   <button type="button" class="close close-sm" data-dismiss="alert">
+                         <i class="icon-remove"></i>
+                   </button>
+                    <strong>Sukses!</strong> <?php echo e(get_ci()->session->flashdata('notif')); ?>
+
+               </div>
+            </section>
+            
+        </div>
+    </div>
+    <?php endif; ?>
+    <?php if(!empty(get_ci()->session->flashdata('notif_error'))): ?>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+              <div class="alert alert-danger fade in">
+                   <button type="button" class="close close-sm" data-dismiss="alert">
+                         <i class="icon-remove"></i>
+                   </button>
+                    <strong>Error!</strong> <?php echo e(get_ci()->session->flashdata('notif_error')); ?>
+
+               </div>
+            </section>
+            
+        </div>
+    </div>
+    <?php endif; ?>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">Proses Penyeleksian Beras Miskin</header>
+                <div class="panel-body">
+                    <form method="post" class="form-horizontal" action="<?php echo e(site_url('seleksi/do_add')); ?>">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Bulan</label>
+                            <div class="col-sm-10">
+                                <select name="bulan" class="form-control">
+                                  <?php foreach(generate_bulan() as $key=> $item): ?>
+                                    <option value="<?php echo e($key); ?>"><?php echo e($item); ?></option>
+
+                                  <?php endforeach; ?>
+                                </select>
+                                <span class="help-block"><?php echo form_error('bulan'); ?></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tahun</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="tahun" class="form-control" value="<?php echo e(set_value('tahun')); ?>">
+                                <span class="help-block"><?php echo form_error('tahun'); ?></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-sm-10 pull-right">
+                                
+                                <button class="btn btn-primary" type="submit"><i class="icon_floppy"></i> Proses</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

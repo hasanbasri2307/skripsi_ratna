@@ -55,6 +55,36 @@ $route['stok_beras/edit/(:num)'] = "stok_beras/stok_beras_edit/$1";
 $route['stok_beras/delete/(:num)'] = "stok_beras/stok_beras_delete/$1";
 $route['stok_beras/view/(:num)'] = "stok_beras/stok_beras_view/$1"; 
 
+$route['kriteria'] = "kriteria/index";
+$route['kriteria/add'] = "kriteria/kriteria_add";
+$route['kriteria/edit/(:num)'] = "kriteria/kriteria_edit/$1";
+$route['kriteria/delete/(:num)'] = "kriteria/kriteria_delete/$1";
+$route['kriteria/view/(:num)'] = "kriteria/kriteria_view/$1"; 
+
+$route['transaksi'] = "transaksi/index";
+$route['transaksi/add'] = "transaksi/transaksi_add";
+$route['transaksi/edit/(:num)'] = "transaksi/transaksi_edit/$1";
+$route['transaksi/delete/(:num)'] = "transaksi/transaksi_delete/$1";
+$route['transaksi/view/(:num)'] = "transaksi/transaksi_view/$1";
+
+$route['seleksi'] = "seleksi/seleksi_add";
+$route['seleksi/add'] = "seleksi/seleksi_add";
+$route['seleksi/edit/(:num)'] = "seleksi/seleksi_edit/$1";
+$route['seleksi/delete/(:num)'] = "seleksi/seleksi_delete/$1";
+$route['seleksi/view/(:num)'] = "seleksi/seleksi_view/$1";
+
+
+$route['pembagian'] = "pembagian/index";
+$route['pembagian/add'] = "pembagian/pembagian_add";
+$route['pembagian/edit/(:num)'] = "pembagian/pembagian_edit/$1";
+$route['pembagian/delete/(:num)'] = "pembagian/pembagian_delete/$1";
+$route['pembagian/view/(:num)'] = "pembagian/pembagian_view/$1";
+$route['pembagian/view/(:num)/(:num)'] = "pembagian/detail_pembagian/$1/$2";
+
+$route['laporan_data_warga'] = "report/data_warga";
+$route['laporan_data_stok_beras'] = "report/stok_beras";
+$route['laporan_penerimaan_beras'] = "report/penerimaan_beras";
+
 $route['404_override'] = '';
 
 

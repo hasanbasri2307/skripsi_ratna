@@ -45,6 +45,7 @@ class Auth extends Public_Controller {
             {
                 $this->session->set_userdata("id_user",$check['id_user']);
                 $this->session->set_userdata("username",$check['username']);
+                $this->session->set_userdata("level",$check['level']);
                 redirect("dashboard");
             }
 
