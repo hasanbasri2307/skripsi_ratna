@@ -37,17 +37,23 @@ Kecamatan Kembangan, <br /> Jakarta Barat (kode pos 11620)</div>
         <?php
         $bulan = [];
         ?>
+        <?php if(!empty($stok_beras)): ?>
         <?php foreach($stok_beras as $key => $item): ?>
           <tr>
             <td class="service"><?php echo e($key +=1); ?>.</td>
             <td class="service"><?php echo e(convert_month($item->bulan)); ?></td>
             <td class="service"><?php echo e($item->tahun); ?> </td>
-            <td class="desc"><?php echo e($item->jml_stock - $item->tambahan_stock); ?></td>
-            <td class="unit"><?php echo e($item->tambahan_stock); ?></td>
-            <td class="qty"><?php echo e($item-> stock_terpakai); ?></td>
+            <td class="desc"><?php echo e($item->jml_stock - $item->tambahan_stock); ?> Karung</td>
+            <td class="unit"><?php echo e($item->tambahan_stock); ?> Karung</td>
+            <td class="qty"><?php echo e($item-> stock_terpakai); ?> Karung</td>
           </tr>
           
         <?php endforeach; ?>
+        <?php else: ?>
+        <tr>
+           <td colspan="6">Data Kosong</td>
+        </tr>
+        <?php endif; ?>
         
         </tbody>
       </table>

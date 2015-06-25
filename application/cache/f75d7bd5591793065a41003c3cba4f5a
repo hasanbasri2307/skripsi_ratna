@@ -32,7 +32,7 @@ Kecamatan Kembangan, <br /> Jakarta Barat (kode pos 11620)</div>
           </tr>
         </thead>
         <tbody>
-
+        <?php if(!empty($warga)): ?>
         <?php foreach($warga as $key => $item): ?>
           <tr>
             <td class="service"><?php echo e($key +=1); ?>.</td>
@@ -42,6 +42,11 @@ Kecamatan Kembangan, <br /> Jakarta Barat (kode pos 11620)</div>
             <td class="total"><?php echo e($item->rw); ?></td>
           </tr>
         <?php endforeach; ?>
+        <?php else: ?>
+         <tr>
+            <td colspan="5">Data Kosong</td>
+          </tr>
+        <?php endif; ?>
         </tbody>
       </table>
       

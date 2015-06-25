@@ -36,6 +36,7 @@ Kecamatan Kembangan, <br /> Jakarta Barat (kode pos 11620)</div>
         <?php
         
         ?>
+        <?php if(!empty($penerimaan_beras)): ?>
         <?php foreach($penerimaan_beras as $key => $item): ?>
           <tr>
             <td><?php echo e($key+=1); ?>.</td>
@@ -45,6 +46,12 @@ Kecamatan Kembangan, <br /> Jakarta Barat (kode pos 11620)</div>
             <td><?php if($item->status_pembagian ==0):?> Belum Diambil <?php elseif($item->status_pembagian==1):?> Sudah Diambil <?php elseif($item->status_pembagian==2):?> Tidak Diambil. <?php endif;?> </td>
           </tr>   
         <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+              <td colspan="5">Data Kosong</td>
+          </tr>
+
+        <?php endif; ?>
         
         </tbody>
       </table>

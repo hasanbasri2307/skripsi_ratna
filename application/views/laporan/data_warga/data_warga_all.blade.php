@@ -32,7 +32,7 @@ Kecamatan Kembangan, <br /> Jakarta Barat (kode pos 11620)</div>
           </tr>
         </thead>
         <tbody>
-
+        @if(!empty($warga))
         @foreach($warga as $key => $item)
           <tr>
             <td class="service">{{ $key +=1 }}.</td>
@@ -42,6 +42,11 @@ Kecamatan Kembangan, <br /> Jakarta Barat (kode pos 11620)</div>
             <td class="total">{{ $item->rw }}</td>
           </tr>
         @endforeach
+        @else
+         <tr>
+            <td colspan="5">Data Kosong</td>
+          </tr>
+        @endif
         </tbody>
       </table>
       
